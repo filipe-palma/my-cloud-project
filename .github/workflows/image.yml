@@ -15,6 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Build JAR
+        run: mvn -B -q -DskipTests package
+        working-directory: services/product-service
+
       - uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
