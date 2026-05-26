@@ -1,12 +1,16 @@
 terraform {
   required_version = ">= 1.9.0"
 
-backend "local" {}
+  backend "local" {}
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0"
     }
   }
 }
@@ -24,7 +28,8 @@ resource "aws_s3_bucket" "lab11" {
   bucket = "lab11-demo-${random_id.suffix.hex}"
 
   tags = {
-    Lab = "11"
+    Lab        = "11"
+    Environment = "Lab11"
     ManagedBy = "Terraform"
   }
 }
